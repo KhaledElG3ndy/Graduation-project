@@ -20,7 +20,7 @@ const Home = () => {
       id: 1,
       title: "Study",
       description:
-        "Access study materials and enhance your learning experience.",
+        "Gain access to a comprehensive collection of study materials, including lecture notes, e-books, and practice questions. Enhance your learning experience with interactive resources tailored to your courses.",
       buttonText: "Explore Study",
       image: study,
     },
@@ -28,28 +28,31 @@ const Home = () => {
       id: 2,
       title: "News",
       description:
-        "Stay updated with the latest college news and announcements.",
+        "Stay informed with the latest updates from your college, including important announcements, event schedules, policy changes, and achievements. Never miss out on crucial information about campus life.",
       buttonText: "Read News",
       image: news,
     },
     {
       id: 3,
       title: "Communication",
-      description: "Connect with peers and faculty seamlessly.",
+      description:
+        "Effortlessly connect with classmates, professors, and academic staff through chat, forums, and discussion boards. Share ideas, collaborate on projects, and stay engaged with your academic community.",
       buttonText: "Start Communicating",
       image: Communication,
     },
     {
       id: 4,
       title: "Guidance",
-      description: "Get advice and guidance from academic counselors.",
+      description:
+        "Receive personalized academic advice and career counseling from experienced mentors. Get support for course selection, career planning, and skill development to achieve your academic and professional goals.",
       buttonText: "Seek Guidance",
       image: guide,
     },
     {
       id: 5,
       title: "Schedules",
-      description: "Check class schedules and faculty office hours easily.",
+      description:
+        "Easily check your class schedules, faculty office hours, and exam timetables. Stay organized and plan your academic activities efficiently with up-to-date scheduling information.",
       buttonText: "View Schedule",
       image: schedule,
     },
@@ -64,11 +67,10 @@ const Home = () => {
         }`}
       >
         <div className={styles.textContent}>
-          <h1>Streamline Your College Life</h1>
+          <h1>Empower Your College Journey</h1>
           <p className={isDarkMode ? styles.lightText : styles.darkText}>
-            Online education enables students to learn from anywhere, leveraging
-            the power of technology for a flexible and efficient educational
-            experience.
+            Manage your studies, stay updated with campus events, and connect
+            with your academic community—all in one platform.
           </p>
 
           <div className={styles.buttons}>
@@ -79,20 +81,25 @@ const Home = () => {
         <div className={styles.imageContainer}>
           <img
             src={img}
-            alt="Streamline your college life"
+            alt="Empower your college journey"
             className={styles.image}
           />
         </div>
       </div>
-
       <div
-        className={`${styles.sectionContainer} ${
+        className={`${styles.cardsContainer} ${
           isDarkMode ? styles.darkMode : styles.lightMode
         }`}
       >
-        {sections.map((section) => (
-          <SectionCard key={section.id} {...section} />
-        ))}
+        <div
+          className={`${styles.sectionContainer} ${
+            isDarkMode ? styles.darkMode : styles.lightMode
+          }`}
+        >
+          {sections.map((section) => (
+            <SectionCard key={section.id} {...section} />
+          ))}
+        </div>
       </div>
 
       <Footer />

@@ -91,13 +91,18 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   opacity: 0.9;
 }
-
-.sectionContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.cardsContainer {
+  display: flex;
   gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.sectionContainer {
+  max-width: 1000px;
   padding: 50px;
-  background-color: #ffffff;
+  justify-content: center;
+  align-items: start;
 }
 
 @keyframes typing {
