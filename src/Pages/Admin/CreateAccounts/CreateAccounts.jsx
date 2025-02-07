@@ -16,10 +16,10 @@ const CreateStudentAccount = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [nationalId, setNationalId] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState(false);
   const [role, setRole] = useState("student");
   const { isDarkMode } = useDarkMode();
 
@@ -29,7 +29,10 @@ const CreateStudentAccount = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let api_url = "";
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    const api_url = "";
+
     try {
       const response = await fetch(api_url, {
         method: "POST",
@@ -37,14 +40,13 @@ const CreateStudentAccount = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName,
-          lastName,
+          fullName,
           email,
           password,
           gender,
           phoneNumber,
           nationalId,
-          year: role === "student" ? year : "",
+          year: role === "student",
           role,
         }),
       });
@@ -162,31 +164,28 @@ const CreateStudentAccount = () => {
           </div>
 
           <div className={styles.inputWithIcon}>
-            <select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              required
-              className={styles.select}
-            >
-              <option value="" disabled>
-                Select Gender
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
+            <label>Gender</label>
+            <div>
+              <input
+                type="checkbox"
+                checked={gender}
+                onChange={(e) => setGender(e.target.checked)}
+                className={styles.checkbox}
+              />
+              <span>{gender ? "Male" : "Female"}</span>
+            </div>
           </div>
 
           <div className={styles.inputWithIcon}>
             <FaCalendar className={styles.icon} />
             <input
-              type="number"
-              placeholder="Year"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              required={role === "student"}
+              type="checkbox"
+              checked={year}
+              onChange={(e) => setYear(e.target.checked)}
               disabled={role === "doctor"}
-              className={styles.inputFullWidth}
+              className={styles.checkbox}
             />
+            <label>Is Student?</label>
           </div>
 
           <p className={styles.passwordNote}>
