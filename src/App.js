@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -11,9 +11,11 @@ import Professor from "./Pages/Professor/Home";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import { DarkModeProvider } from "./contexts/ThemeContext";
+import { useDarkMode } from "./contexts/ThemeContext";
 
 function App() {
+  const { isDarkMode, toggleTheme } = useDarkMode();
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -22,21 +24,20 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    document.body.className = isDarkMode ? "darkMode" : "lightMode";
+  }, [isDarkMode]);
+
   return (
-    <DarkModeProvider>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login/signin" element={<SignInPage />} />
-          <Route path="/Admin" element={<AdminHomePage />} />
-          <Route path="/Professor" element={<Professor />} />
-          <Route
-            path="/Admin/CreateAccounts"
-            element={<AdminCreateAccounts />}
-          />
-        </Routes>
-      </div>
-    </DarkModeProvider>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Login/signin" element={<SignInPage />} />
+        <Route path="/Admin" element={<AdminHomePage />} />
+        <Route path="/Professor" element={<Professor />} />
+        <Route path="/Admin/CreateAccounts" element={<AdminCreateAccounts />} />
+      </Routes>
+    </div>
   );
 }
 

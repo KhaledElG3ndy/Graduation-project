@@ -14,3 +14,12 @@ code {
 a {
   text-decoration: none;
 }
+.lightMode {
+  background-color: #f1f0f0;
+  color: #000;
+}
+
+.darkMode {
+  background: linear-gradient(135deg, #0a0a0a, #161616, #222222);
+  color: #fff;
+}
