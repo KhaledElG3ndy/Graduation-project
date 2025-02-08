@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./SignInPage.module.css";
-import FormInput from "../../components/Student/FormInput/FormInput";
-import Button from "../../components/Student/Button/Button";
+import FormInput from "../../../components/Student/FormInput/FormInput";
+import Button from "../../../components/Student/Button/Button";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
