@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import styles from "./SignInForm.module.css";
-import FormInput from "../FormInput/FormInput";
-import Button from "../Button/Button";
+import styles from "./SignInPage.module.css";
+import FormInput from "../../../components/Student/FormInput/FormInput";
+import Button from "../../../components/Student/Button/Button";
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
@@ -80,5 +80,4 @@ const SignInForm = () => {
     </div>
   );
 };
-
 export default SignInForm;
