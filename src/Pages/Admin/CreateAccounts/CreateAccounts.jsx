@@ -16,11 +16,12 @@ const CreateStudentAccount = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState(false);
+  const [gender, setGender] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [nationalId, setNationalId] = useState("");
-  const [year, setYear] = useState(false);
+  const [year, setYear] = useState(0);
   const [role, setRole] = useState("student");
+
   const { isDarkMode } = useDarkMode();
 
   useEffect(() => {
@@ -31,28 +32,43 @@ const CreateStudentAccount = () => {
     e.preventDefault();
     const fullName = `${firstName} ${lastName}`.trim();
 
-    const api_url = "";
+    console.log({
+      fullName,
+      email,
+      password,
+      gender,
+      phoneNumber,
+      nationalId,
+      year: parseInt(year),
+    });
+
+    let api_url = "https://localhost:44338/User";
+    const data = {
+      fullName,
+      email,
+      password,
+      gender,
+      phoneNumber,
+      nationalId,
+      year,
+    };
 
     try {
+      if (role === "student") {
+        api_url = `${api_url}/RegisterStudent`;
+      } else {
+        api_url = `${api_url}/RegisterDoctor`;
+      }
       const response = await fetch(api_url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          fullName,
-          email,
-          password,
-          gender,
-          phoneNumber,
-          nationalId,
-          year: role === "student",
-          role,
-        }),
+        body: JSON.stringify(data),
       });
 
-      const data = await response.json();
-      console.log("Success:", data);
+      const result = await response.json();
+      console.log("Response:", result, api_url);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -162,30 +178,47 @@ const CreateStudentAccount = () => {
               className={styles.inputFullWidth}
             />
           </div>
-
           <div className={styles.inputWithIcon}>
             <label>Gender</label>
             <div>
-              <input
-                type="checkbox"
-                checked={gender}
-                onChange={(e) => setGender(e.target.checked)}
-                className={styles.checkbox}
-              />
-              <span>{gender ? "Male" : "Female"}</span>
+              <label>
+                <input
+                  type="radio"
+                  value="true"
+                  checked={gender === true}
+                  onChange={() => setGender(true)}
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="false"
+                  checked={gender === false}
+                  onChange={() => setGender(false)}
+                />
+                Female
+              </label>
             </div>
           </div>
 
           <div className={styles.inputWithIcon}>
             <FaCalendar className={styles.icon} />
-            <input
-              type="checkbox"
-              checked={year}
-              onChange={(e) => setYear(e.target.checked)}
+            <select
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              className={styles.inputFullWidth}
               disabled={role === "doctor"}
-              className={styles.checkbox}
-            />
-            <label>Is Student?</label>
+              required
+            >
+              <option value="" disabled>
+                Select Year
+              </option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
           </div>
 
           <p className={styles.passwordNote}>
